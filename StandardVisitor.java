@@ -16,3 +16,4 @@ return isEligibleForDiscountUpgrade;
     }
  public int getVisitLimit(){
 return discountPercent;
+}
