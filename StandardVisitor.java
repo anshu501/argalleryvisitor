@@ -31,6 +31,7 @@ public boolean checkDiscountUpgrade(){
 if (!isActive) {
  return "Please log in before purchasing.";
         }
-
+if(this.artworkName==null || !this.artworkName.equals(artworkName)){
+            this.artworkName = artworkName;
         
         
