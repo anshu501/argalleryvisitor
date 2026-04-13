@@ -7,3 +7,4 @@ public StandardVisitor(int visitorId,String fullName,String gender,String contac
 String ticketType){ 
 super(visitorId,fullName,gender,contactNumber,registrationDate,ticketCost,ticketType);
 this.visitLimit = 5;
+this.discountPercent = 0.10f;
