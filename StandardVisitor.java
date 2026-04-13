@@ -15,3 +15,4 @@ public boolean getIsEligibleForDiscountUpgrade(){
 return isEligibleForDiscountUpgrade;
     }
  public int getVisitLimit(){
+return discountPercent;
