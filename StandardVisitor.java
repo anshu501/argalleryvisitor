@@ -40,3 +40,4 @@ his.buyCount++;
  }
 return "You have already purchased this product";
     }
+//method calculateDiscount() is implemented from parents class which will let user get a discount on the artwork they have bought
