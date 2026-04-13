@@ -147,4 +147,43 @@ public abstract class ArtGalleryVisitor{
         
     }
 
+    //defining abstract methods which will be implemented in the subclass
+
+    public abstract String buyProduct(String artworkName,double artworkPrice);
+
+    public abstract double calculateDiscount();
+
+    public abstract double calculateRewardPoint();
+
+    public abstract String cancelProduct(String artworkName,String cancellationReason);
+
+    public abstract void generateBill();
+
+    //Defining the display method which will be displaying the user's informations
+
+    public void display(){
+        System.out.println("Your visitor Id: " + visitorId);
+        System.out.println("Your Full Name: " + fullName);
+        System.out.println("Your gender: " + gender);
+        System.out.println("Your contact number: " + contactNumber);
+        System.out.println("Your registration date: " + registrationDate);
+        System.out.println("Your ticket cost: " + ticketCost);
+        System.out.println("Your ticket type: " + ticketType);
+        System.out.println("Your visit Count: " + visitCount);
+        System.out.println("Your reward points: " + rewardPoints);
+        System.out.println("Your cancel limit: " + cancelLimit);
+        System.out.println("Your cancel count: " + cancelCount);
+        System.out.println("Your cancellation reason: " + cancellationReason);
+        System.out.println("Your refundable amount: " + refundableAmount);
+        System.out.println("Your active status: " + isActive);
+        System.out.println("Your purchase status: " + isBought);
+        System.out.println("Your buy count: " + buyCount);
+        System.out.println("Your final price: " + finalPrice);
+        System.out.println("Your discounted amount: " + discountAmount);
+        System.out.println("Your artwork name: " + artworkName);
+        System.out.println("Your artwork price: " + artworkPrice);
+
+    }
+
     
+}
