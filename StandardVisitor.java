@@ -22,4 +22,5 @@ public boolean checkDiscountUpgrade(){
  isEligibleForDiscountUpgrade = true;
  discountPercent = 0.15f;
 }
-        
+ return isEligibleForDiscountUpgrade;
+    }        
