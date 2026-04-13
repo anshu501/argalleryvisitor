@@ -17,3 +17,4 @@ return isEligibleForDiscountUpgrade;
  public int getVisitLimit(){
 return discountPercent;
 }
+grade() which //defining method checkDiscountUpchecks whether the visitor is eligible for discount or not
