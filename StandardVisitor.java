@@ -21,3 +21,5 @@ grade() which //defining method checkDiscountUpchecks whether the visitor is eli
 public boolean checkDiscountUpgrade(){
  isEligibleForDiscountUpgrade = true;
  discountPercent = 0.15f;
+}
+        
