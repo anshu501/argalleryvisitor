@@ -11,3 +11,4 @@ this.discountPercent = 0.10f;
 this.isEligibleForDiscountUpgrade = false;
 }
 //defining the accessor methods
+public boolean getIsEligibleForDiscountUpgrade(){
