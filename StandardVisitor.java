@@ -12,3 +12,5 @@ this.isEligibleForDiscountUpgrade = false;
 }
 //defining the accessor methods
 public boolean getIsEligibleForDiscountUpgrade(){
+return isEligibleForDiscountUpgrade;
+    }
