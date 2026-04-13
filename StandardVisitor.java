@@ -29,3 +29,5 @@ public boolean checkDiscountUpgrade(){
  @Override
  public String buyProduct(String artworkName, double artworkPrice) {
 if (!isActive) {
+ return "Please log in before purchasing.";
+        }
