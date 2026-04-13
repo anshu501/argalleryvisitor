@@ -27,3 +27,4 @@ public boolean checkDiscountUpgrade(){
 /*method buyProduct() is implemented from the parent class which will first check whether the visitor have logged in or not and allow
     visitor to buy the product*/
  @Override
+ public String buyProduct(String artworkName, double artworkPrice) {
