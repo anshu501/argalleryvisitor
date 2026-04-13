@@ -5,44 +5,48 @@ private boolean isEligibleForDiscountUpgrade;
 //defining constructor of the class StandardVisitor which will call the attributes from the super class and initialize attributes 
 public StandardVisitor(int visitorId,String fullName,String gender,String contactNumber,String registrationDate,double ticketCost,
 String ticketType){ 
-super(visitorId,fullName,gender,contactNumber,registrationDate,ticketCost,ticketType);
-this.visitLimit = 5;
-this.discountPercent = 0.10f;
-this.isEligibleForDiscountUpgrade = false;
+    super(visitorId,fullName,gender,contactNumber,registrationDate,ticketCost,ticketType);
+    this.visitLimit = 5;
+    this.discountPercent = 0.10f;
+    this.isEligibleForDiscountUpgrade = false;
 }
 //defining the accessor methods
 public boolean getIsEligibleForDiscountUpgrade(){
-return isEligibleForDiscountUpgrade;
-    }
- public int getVisitLimit(){
-return discountPercent;
+    return isEligibleForDiscountUpgrade;
 }
-grade() which //defining method checkDiscountUpchecks whether the visitor is eligible for discount or not
+
+public int getVisitLimit(){
+    return visitLimit;
+}
+
+//defining method checkDiscountUpgrade() which checks whether the visitor is eligible for discount or not
 public boolean checkDiscountUpgrade(){
- isEligibleForDiscountUpgrade = true;
- discountPercent = 0.15f;
-}
- return isEligibleForDiscountUpgrade;
-    }        
+    isEligibleForDiscountUpgrade = true;
+    discountPercent = 0.15f;
+    return isEligibleForDiscountUpgrade;
+}        
 /*method buyProduct() is implemented from the parent class which will first check whether the visitor have logged in or not and allow
     visitor to buy the product*/
- @Override
- public String buyProduct(String artworkName, double artworkPrice) {
-if (!isActive) {
- return "Please log in before purchasing.";
-        }
-if(this.artworkName==null || !this.artworkName.equals(artworkName)){
-            this.artworkName = artworkName;
-    this.artworkPrice = artworkPrice;     
-  this.isBought = true;       
-his.buyCount++;
- return "You have already purchased this product";
- }
-return "You have already purchased this product";
+@Override
+public String buyProduct(String artworkName, double artworkPrice) {
+    if (!isActive) {
+        return "Please log in before purchasing.";
     }
+    if(this.artworkName==null || !this.artworkName.equals(artworkName)){
+        this.artworkName = artworkName;
+        this.artworkPrice = artworkPrice;     
+        this.isBought = true;       
+        this.buyCount++;
+        return "You have already purchased this product";
+    }
+    return "You have already purchased this product";
+}
+
 //method calculateDiscount() is implemented from parents class which will let user get a discount on the artwork they have bought
 @Override
-    public double calculatediscount(){
+    public double calculateDiscount(){
  if(!isBought){
       return 0;
- }
+    }
+
+
