@@ -10,3 +10,4 @@ this.visitLimit = 5;
 this.discountPercent = 0.10f;
 this.isEligibleForDiscountUpgrade = false;
 }
+//defining the accessor methods
