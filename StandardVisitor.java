@@ -14,3 +14,4 @@ this.isEligibleForDiscountUpgrade = false;
 public boolean getIsEligibleForDiscountUpgrade(){
 return isEligibleForDiscountUpgrade;
     }
+ public int getVisitLimit(){
