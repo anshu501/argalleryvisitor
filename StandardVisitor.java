@@ -8,3 +8,4 @@ String ticketType){
 super(visitorId,fullName,gender,contactNumber,registrationDate,ticketCost,ticketType);
 this.visitLimit = 5;
 this.discountPercent = 0.10f;
+this.isEligibleForDiscountUpgrade = false;
