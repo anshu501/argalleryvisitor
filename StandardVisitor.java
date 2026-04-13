@@ -36,3 +36,4 @@ if(this.artworkName==null || !this.artworkName.equals(artworkName)){
     this.artworkPrice = artworkPrice;     
   this.isBought = true;       
 his.buyCount++;
+ return "You have already purchased this product";
