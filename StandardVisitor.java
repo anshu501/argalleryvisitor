@@ -45,3 +45,4 @@ return "You have already purchased this product";
     public double calculatediscount(){
  if(!isBought){
       return 0;
+ }
