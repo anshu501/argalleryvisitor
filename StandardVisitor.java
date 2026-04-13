@@ -28,3 +28,4 @@ public boolean checkDiscountUpgrade(){
     visitor to buy the product*/
  @Override
  public String buyProduct(String artworkName, double artworkPrice) {
+if (!isActive) {
