@@ -33,5 +33,6 @@ if (!isActive) {
         }
 if(this.artworkName==null || !this.artworkName.equals(artworkName)){
             this.artworkName = artworkName;
-        
-        
+    this.artworkPrice = artworkPrice;     
+  this.isBought = true;       
+his.buyCount++;
