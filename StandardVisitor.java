@@ -31,3 +31,6 @@ public boolean checkDiscountUpgrade(){
 if (!isActive) {
  return "Please log in before purchasing.";
         }
+
+        
+        
