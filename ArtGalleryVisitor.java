@@ -47,3 +47,104 @@ public abstract class ArtGalleryVisitor{
 
     }
 
+//defining the accessor (getters) methods individually
+    public int getVisitorId(){
+        return visitorId;
+    }
+
+    public String getFullName(){
+        return fullName;
+    }
+
+    public String getGender(){
+        return gender;
+    }
+
+    public String getContactNumber(){
+        return contactNumber;
+    }
+
+    public String getRegistrationDate(){
+        return registrationDate;
+    }
+
+    public double getTicketCost(){
+        return ticketCost;
+    }
+
+    public String getTicketType(){
+        return ticketType;
+    }
+
+    public int getVisitCount(){
+        return visitCount;
+    }
+
+    public double getRewardPoints(){
+        return rewardPoints;
+    }
+
+    public int getCancelLimit(){
+        return cancelLimit;
+    }
+
+    public int getCancelCount(){
+        return cancelCount;
+    }
+
+    public String getCancellationReason(){
+        return cancellationReason;
+    }
+
+    public double getRefundableAmount(){
+        return refundableAmount;
+    }
+
+    public boolean getIsActive(){
+        return isActive;
+    }
+
+    public boolean getIsBought(){
+        return isBought;
+    }
+
+    public int getBuyCount(){
+        return buyCount;
+    }
+
+    public double getFinalPrice(){
+        return finalPrice;
+    }
+
+    public double getDiscountAmount(){
+        return discountAmount;
+    }
+
+    public String getArtworkName(){
+        return artworkName;
+    }
+
+    public double getArtworkPrice(){
+        return artworkPrice;
+    }
+    //defining mutator methods (setters)
+    public void setFullName(String fullName){
+        this.fullName = fullName;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public void setContactNumber(String contactNumber){
+        this.contactNumber = contactNumber;
+    }
+
+    //defining method named logVisit() which will increment the visit count by 1 and set the active status to true
+    public void logVisit(){
+        visitCount++;
+        isActive = true;
+        
+    }
+
+    
