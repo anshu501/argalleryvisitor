@@ -18,3 +18,4 @@ return isEligibleForDiscountUpgrade;
 return discountPercent;
 }
 grade() which //defining method checkDiscountUpchecks whether the visitor is eligible for discount or not
+public boolean checkDiscountUpgrade(){
