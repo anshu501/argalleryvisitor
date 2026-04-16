@@ -50,6 +50,8 @@ public boolean checkDiscountUpgrade(){
         if(!isBought){
             return 0;
         }
+
+
         checkDiscountUpgrade();
         discountAmount = artworkPrice * discountPercent;
         finalPrice = artworkPrice - discountAmount;
