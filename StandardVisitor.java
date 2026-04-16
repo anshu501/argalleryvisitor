@@ -76,3 +76,4 @@ System.out.println("Full Name: " + fullName);
 System.out.println("Discounted amount: " + discountAmount);
  System.out.println("Final Price: " + finalPrice);
         }
+   }
