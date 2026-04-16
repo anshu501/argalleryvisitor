@@ -461,5 +461,457 @@ public class ArtGalleryGUI{
         buyProduct = new JButton("Buy Product");
         buyProduct.setPreferredSize(new Dimension(200, 50));
 
-        
+        buyProduct.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idStr = idSecondPageText.getText().trim();
+                        String name = artworkNameText.getText();
+                        String priceStr = artworkPriceText.getText().trim();
+
+                        int id = Integer.parseInt(idStr);
+                        double price = Double.parseDouble(priceStr);
+                        boolean visitorFound = false; 
+                        if(price <= 0){
+                            JOptionPane.showMessageDialog(null, "The price cannot be negative or zero", "Invalid Price!!", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                        for (ArtGalleryVisitor visitor : visitors){
+                            if(visitor.getVisitorId() == id){
+                                String message = visitor.buyProduct(name, price);
+                                JOptionPane.showMessageDialog(null, message, "Remarks", JOptionPane.INFORMATION_MESSAGE);
+                                visitorFound = true;
+                            }
+                        }
+                        if (!visitorFound) {
+                            JOptionPane.showMessageDialog(null, "The visitor Id: " + idStr + " cannot be found", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                    }
+                    catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(null, "Please enter numeric value for price", "warning", JOptionPane.WARNING_MESSAGE);  
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Exception Occured", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+
+                }
+            });
+        cancelProduct = new JButton("Cancel Product");
+        cancelProduct.setPreferredSize(new Dimension(200, 50));
+        artworkButton.add(buyProduct);
+        artworkButton.add(cancelProduct);
+        gbcBuying.gridy = 5;
+        gbcBuying.gridx = 0;
+        gbcBuying.gridwidth = 2; 
+        gbcBuying.anchor = GridBagConstraints.CENTER; 
+        gbcBuying.fill = GridBagConstraints.NONE; 
+        gbcBuying.weighty = 0; 
+        buyingPanel.add(artworkButton, gbcBuying); 
+        cancelProduct.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idString = idSecondPageText.getText().trim();
+                        String cancellationReason = cancellationReasonText.getText().trim();
+                        String artworkName = artworkNameText.getText();
+
+                        int id = Integer.parseInt(idString);
+                        ArtGalleryVisitor foundVisitor = null;
+                        for(ArtGalleryVisitor visitor : visitors){
+                            if(visitor.getVisitorId() == id){
+                                foundVisitor = visitor;
+                                break;
+                            }
+                        }
+                        if(foundVisitor != null && !cancellationReason.isEmpty() && !artworkName.isEmpty()){
+                            String message = foundVisitor.cancelProduct(artworkName, cancellationReason);
+                            JOptionPane.showMessageDialog(null, message, "Remarks", JOptionPane.INFORMATION_MESSAGE);
+
+                            return;
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Required fields are empty", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                    }
+                    catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(null, "Enter Numeric Id value.", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "An error occured.", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                    }
+
+                }
+
+            } );
+        actionPanel = new JPanel();
+        actionPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 3),
+                "Actions",
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
+                new Font("Arial", Font.BOLD, 20)));
+
+        actionPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbcAction = new GridBagConstraints();
+        gbcAction.insets = new Insets(10,10,10,10);
+        gbcAction.anchor = GridBagConstraints.WEST;
+
+        calcDiscount = new JButton("Calculate Discount");
+        calcDiscount.setPreferredSize(new Dimension(200, 30));
+        gbcAction.gridy = 0;
+        gbcAction.gridx = 0;
+        actionPanel.add(calcDiscount, gbcAction);
+        calcDiscount.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idStr = idSecondPageText.getText().trim();
+                        int id = Integer.parseInt(idStr);
+                        ArtGalleryVisitor found = null;
+
+                        if (idStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(frame, "Please enter a Visitor ID.", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                        for (ArtGalleryVisitor visitor : visitors){
+                            if(visitor.getVisitorId() == id){
+                                found = visitor;
+                                break;
+                            }
+                        }
+                        if(found == null){
+                            JOptionPane.showMessageDialog(null, "Id not found.", "warning",JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                        if (found.getIsBought()) {
+                            double discount = found.calculateDiscount();
+                            double finalPriceDiscount = found.getFinalPrice();
+                            String artworkNameDiscount = found.getArtworkName();
+                            double artworkPriceDiscount = found.getArtworkPrice();
+
+                            JOptionPane.showMessageDialog(null, found.getFullName() + "discount is RS." + discount, "Discount amount", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "No artwork has been bought", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "An error occured.", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                }
+            });
+
+        calcReward = new JButton("Calculate Reward");
+        calcReward.setPreferredSize(new Dimension(200, 30));
+        gbcAction.gridy = 0;
+        gbcAction.gridx = 1;
+        actionPanel.add(calcReward, gbcAction);
+        calcReward.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idStr = idSecondPageText.getText().trim();
+                        int id = Integer.parseInt(idStr);
+                        ArtGalleryVisitor found = null;
+
+                        if (idStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(frame, "Please enter a Visitor ID.", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        for (ArtGalleryVisitor visitor : visitors){
+                            if(visitor.getVisitorId() == id){
+                                found = visitor;
+                                break;
+                            }
+                        }
+                        if(found == null){
+                            JOptionPane.showMessageDialog(null, "Id not found.", "warning",JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                        if (found.getIsBought()) {
+                            if(found.getDiscountAmount()>0){
+                                double finalPriceDiscount = found.getFinalPrice();      
+                                double reward = found.calculateRewardPoint();
+
+                                JOptionPane.showMessageDialog(null, found.getFullName() + "Reward for the purchase" + reward , "Reward", JOptionPane.WARNING_MESSAGE);
+
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Please calculate discount first", "Warning", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "No artwork has been bought", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "An error occured.", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                    }
+                }
+            });
+        checkUpgrade = new JButton("Check for Upgrade");
+        checkUpgrade.setPreferredSize(new Dimension(200, 30));
+        gbcAction.gridy = 1;
+        gbcAction.gridx = 0;
+        actionPanel.add(checkUpgrade, gbcAction);
+        checkUpgrade.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idStr = idSecondPageText.getText().trim();
+                        int id = Integer.parseInt(idStr);
+                        ArtGalleryVisitor found = null;
+
+                        if (idStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Please enter your Visitor Id.", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        for (ArtGalleryVisitor visitor : visitors) {
+                            if (visitor.getVisitorId() == id) {
+                                found = visitor;
+                                break;
+                            }
+                        }
+
+                        if (found != null){
+                            if (found instanceof StandardVisitor){
+                                StandardVisitor standardVisitor = (StandardVisitor) found;
+                                boolean upgradeStatus = standardVisitor.checkDiscountUpgrade();
+
+                                if(upgradeStatus){
+                                    JOptionPane.showMessageDialog(null, "The visitor with Id " + idStr + " is now eligible for a discount upgrade.", "Upgrade Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(null, "The visitor with Id " + idStr + " is not yet eligible.", "Not eligible yet", JOptionPane.INFORMATION_MESSAGE);
+                                }
+
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Your ticket type is not a Standard ticket type.", "Not a Standard Visitor", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Visitor Id not found!! Please enter a valid visitor Id.", "Visitor id not found",JOptionPane.WARNING_MESSAGE);
+                        }
+
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid numeric value for Visitor Id.", "Id not numeric", JOptionPane.WARNING_MESSAGE);}
+                    catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "An unexpected error occurred: ", "Error", JOptionPane.ERROR_MESSAGE);   
+                    }
+
+                }
+
+            });
+
+        personalArtAdvisor = new JButton("Get Your Personal Art Advisor");
+        personalArtAdvisor.setPreferredSize(new Dimension(250, 30));
+        gbcAction.gridy = 1;
+        gbcAction.gridx = 1;
+        actionPanel.add(personalArtAdvisor, gbcAction);
+        personalArtAdvisor.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    try{
+                        String idStr = idSecondPageText.getText().trim();
+                        int id = Integer.parseInt(idStr);
+                        ArtGalleryVisitor found = null;
+
+                        if (idStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Please enter your Visitor Id.", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                        for (ArtGalleryVisitor visitor : visitors) {
+                            if (visitor.getVisitorId() == id) {
+                                found = visitor;
+                                break;
+                            }
+                        }
+                        if (found != null){
+                            if (found instanceof EliteVisitor){
+                                EliteVisitor eliteVisitor = (EliteVisitor) found; 
+                                boolean assignStatus = eliteVisitor.assignPersonalArtAdvisor();
+
+                                if(assignStatus){
+                                    JOptionPane.showMessageDialog(null, "The visitor with Id " + idStr + " has been assigned with an Art Advisor", "Advisor assigned", JOptionPane.INFORMATION_MESSAGE);
+
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(null, "The visitor with Id " + idStr + " is not yet eligible.", "Not eligible yet", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Your ticket type is not a Elite ticket type.", "Not an Elite Visitor", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Visitor Id not found!! Please enter a valid visitor Id.", "Visitor id not found",JOptionPane.WARNING_MESSAGE);
+                        }
+
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid numeric value for Visitor Id.", "Id not numeric", JOptionPane.WARNING_MESSAGE);}
+                    catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "An unexpected error occurred: ", "Error", JOptionPane.ERROR_MESSAGE);   
+                    }
+                }
+            });
+
+        generateBill = new JButton("Generate Bill");
+        generateBill.setPreferredSize(new Dimension(200, 30));
+        gbcAction.gridy = 2;
+        gbcAction.gridx = 0;
+        actionPanel.add(generateBill, gbcAction);
+        generateBill.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    try {
+                        String idStr = idSecondPageText.getText().trim();
+                        if (idStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Please enter a Visitor ID.", "Warning", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        int id = Integer.parseInt(idStr);
+
+                        ArtGalleryVisitor foundVisitor = null;
+                        for (ArtGalleryVisitor visitor : visitors) {
+                            if (visitor.getVisitorId() == id) {
+                                foundVisitor = visitor;
+                                break;
+                            }
+                        }
+                        File writer = new File("Bill.txt");
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(writer));
+                        if (foundVisitor != null) {
+                            if(foundVisitor.getIsBought()){
+                                if(foundVisitor.getDiscountAmount() > 0){
+                                    System.out.println();
+                                    System.out.println("=".repeat(60));
+                                    System.out.println(String.format("%35s", "Purchase Bill"));
+                                    System.out.println("=".repeat(60));
+                                    foundVisitor.generateBill();
+                                    System.out.println("=".repeat(60));
+                                    System.out.println(String.format("%40s", "Thank you for your visit!!"));
+                                    System.out.println("=".repeat(60) + "\n");
+
+                                    int idHere = foundVisitor.getVisitorId();
+                                    String name = foundVisitor.getFullName();
+                                    String artworkName = foundVisitor.getArtworkName();
+                                    double discountAmount = foundVisitor.getDiscountAmount();
+                                    double finalPrice = foundVisitor.getFinalPrice();
+                                    bw.write("\n");
+                                    bw.write("=".repeat(60));
+                                    bw.newLine();
+                                    bw.write(String.format("%35s", "Purchase Bill"));
+                                    bw.newLine();
+                                    bw.write("=".repeat(60));
+                                    bw.newLine();
+
+                                    // Instead of repeating, reuse visitor details
+                                    bw.write("Visitor Id         : " + idHere + "\n");
+                                    bw.write("Visitor's Name     : " + name + "\n");
+                                    bw.write("Artwork Purchased  : " + artworkName + "\n");
+                                    bw.write("Discounted Amount  : " + discountAmount + "\n");
+                                    bw.write("Final Price        : " + finalPrice + "\n");
+
+                                    bw.write("=".repeat(60));
+                                    bw.newLine();
+                                    bw.write(String.format("%40s", " Thank you for your visit!!"));
+                                    bw.newLine();
+                                    bw.write("=".repeat(60));
+                                    bw.newLine();
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Please calculate discount before generating bill", "Warning", JOptionPane.WARNING_MESSAGE);
+                                    return;
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "You have not bought any item!! Please buy first", "Item not bought", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(frame,"Visitor with ID: " + idStr + " not found.", "Visitor Not Found", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        bw.close();
+                        
+                        JOptionPane.showMessageDialog(null, "Saved successfully:\n" + writer.getAbsolutePath(), "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Please Enter Numeric ID", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "An error occured","Error", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                }
+            });
+
+        displayDetails = new JButton("Visitor Details");
+        displayDetails.setPreferredSize(new Dimension(200, 30));
+        gbcAction.gridy = 2;
+        gbcAction.gridx = 1;
+        actionPanel.add(displayDetails, gbcAction);
+        displayDetails.addActionListener(new ActionListener(){ 
+                @Override
+                public void actionPerformed(ActionEvent event) {
+
+                    String[] columns = {"Visitor IDs", "Name", "Gender", "Date", "Ticket Type", "Ticket Price","Visit Count", "Active Status"};
+                    DefaultTableModel model = new DefaultTableModel(columns, 0);
+                    JTable table = new JTable(model);
+                    for(ArtGalleryVisitor visitor : visitors){
+                        Object[] row = {visitor.getVisitorId(), visitor.getFullName(), visitor.getGender(), visitor.getRegistrationDate(), visitor.getTicketType(), visitor.getTicketCost(),visitor.getVisitCount(), visitor.getIsActive()};
+                        model.addRow(row);
+                    }
+
+                    JScrollPane scrollPane = new JScrollPane(table);
+                    JDialog dialog = new JDialog(frame, "Visitor Data", true);
+                    dialog.setSize(800, 800);
+                    dialog.getContentPane().setBackground(new Color(30, 144, 255));
+                    dialog.setLocationRelativeTo(null);
+                    dialog.add(scrollPane);
+                    dialog.setVisible(true);
+
+                }
+            });
+
+        saveFiles = new JButton("Write to file");
+        saveFiles.setPreferredSize(new Dimension(200,30));
+        gbcAction.gridy = 3;
+        gbcAction.gridx = 0;
+        actionPanel.add(saveFiles, gbcAction);
+        saveFiles.addActionListener(new ActionListener() { //Event listener to save to files
+                public void actionPerformed(ActionEvent event) {
+                    try{
+                        File file = new File("data.txt");
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                        //ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("visitor.dat"));
+                        StringBuilder sb = new StringBuilder();
+
+                        // Table header
+                        sb.append("=".repeat(200)).append("\n"); 
+                        String header = String.format(
+                                "%-10s %-20s %-10s %-15s %-15s %-12s %-12s %-10s %-10s %-10s %-20s %-12s %-12s %-20s",
+                                "ID", "Full Name", "Gender", "Contact No", "Reg Date",
+                                "Ticket Cost", "Ticket Type", "Active", "Visits", "Buys",
+                                "Artwork Name", "Art Price", "Cancels", "Personal Art Advisor"
+                            );
+                        sb.append(header).append("\n");
+
+                        sb.append("=".repeat(200)).append("\n"); // underline (adjust 160 if needed)
+
+                        // Table rows
+                                   
 
