@@ -104,3 +104,12 @@ this.isBought = false;
                 this.cancellationReason = cancellationReason;
                 return "Your purchase is now cancelled";
             }
+ else{
+                return "Make sure you have entered the correct artwork name";
+            }
+        }
+
+        else{
+            return "You have not made any purchase";
+        }
+    }
