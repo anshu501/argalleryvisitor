@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.border.*;
-import java.awt.Frame;
 import java.io.*;
-import java.awt.event.WindowEvent.*;
+import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.table.*;
 
 public class ArtGalleryGUI{
     ArrayList<ArtGalleryVisitor> visitors = new ArrayList<>();  //Initialising arraylist
@@ -177,8 +175,8 @@ public class ArtGalleryGUI{
         month = new JComboBox<>(monthArray);
         registrationPanel.add(month);
 
-        String[] yearArray = new String[26];
-        for(int i = 0; i < 26; i++){
+        String[] yearArray = new String[27];
+        for(int i = 0; i < 27; i++){
             yearArray[i] = String.valueOf(i+2000);
         }
         year = new JComboBox<>(yearArray);
@@ -956,6 +954,80 @@ public class ArtGalleryGUI{
 
                 
             });
-        
+        readFiles = new JButton("Read from file"); //Button to read from file
+        readFiles.setPreferredSize(new Dimension(200,30));
+        gbcAction.gridy = 3;
+        gbcAction.gridx = 1;
+        actionPanel.add(readFiles, gbcAction);
+        readFiles.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    try{
+                        File reader = new File("data.txt");
+                        BufferedReader br = new BufferedReader(new FileReader(reader));
+                        String line;
+                        StringBuilder sb = new StringBuilder();
+                        while((line = br.readLine()) != null){
+                            sb.append(line).append("\n");
+                        }
+                        JTextArea txt = new JTextArea();
+                        txt.setEditable(false);
+                        txt.setText(sb.toString());
+                        txt.setFont(new Font("Monospaced", Font.PLAIN, 14));
+                        JScrollPane pane = new JScrollPane(txt);
+
+                        JDialog jd = new JDialog();
+                        jd.setTitle("Reading from file");
+                        jd.add(pane);
+                        jd.setSize(1000,600);
+                        jd.setVisible(true);
+
+                        br.close();
+                    }
+
+                    catch(Exception ex){
+                        JOptionPane.showMessageDialog(null, "Error!! When we were trying to read data from file the error was occurred","Error", JOptionPane.WARNING_MESSAGE);
+                    }
+                } 
+            });
+
+        JPanel artworksPanel = new JPanel();
+        artworksPanel.setLayout(new BoxLayout(artworksPanel, BoxLayout.Y_AXIS));
+        buyingPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        artworksPanel.add(buyingPanel);
+        artworksPanel.add(actionPanel,BorderLayout.CENTER);
+
+        mainPanel.add(entryPagePanel, "EntryPage");
+        mainPanel.add(artworksPanel, "ArtworksPage");
+
+        leftNav.add(Box.createVerticalGlue());
+        leftNav.add(entry);
+        leftNav.add(Box.createRigidArea(new Dimension(0,30)));
+        leftNav.add(artworks);
+        leftNav.add(Box.createVerticalGlue());
+
+        entry.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    cardLayout.show(mainPanel, "EntryPage");
+                }
+            });
+
+        artworks.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    cardLayout.show(mainPanel, "ArtworksPage");
+                }
+            });
+
+        frame.setResizable(false);
+        frame.add(mainPanel, BorderLayout.CENTER);
+        frame.add(leftNav, BorderLayout.WEST);
+
+        cardLayout.show(mainPanel, "EntryPage");
+        frame.setVisible(true);
+    }
+    //Creating a method to call GUI class
+    public static void main(String[] args){ 
+        new ArtGalleryGUI();
+    }
+}
 
 
