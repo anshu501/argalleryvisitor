@@ -96,3 +96,6 @@ public String cancelProduct(String artworkName,String cancellationReason){
 if(buyCount > 0){
 if(this.artworkName.equals(artworkName)){
                 this.artworkName = "";
+this.isBought = false;
+                refundableAmount = artworkPrice - (artworkPrice * 0.05);
+                rewardPoints -= finalPrice * 5;
