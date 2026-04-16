@@ -85,3 +85,4 @@ isEligibleForDiscountUpgrade = false;
 visitCount = 0;
 cancelCount = 0;
 rewardPoints = 0;
+ }
