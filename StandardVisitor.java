@@ -90,3 +90,6 @@ rewardPoints = 0;
 //implementing cancelProduct from the parent class
 public String cancelProduct(String artworkName,String cancellationReason){
         if(cancelCount == 3){
+ terminateVisitor();
+            return "Your account has been terminated because it exceeded the cancel limit of 3";
+        }
