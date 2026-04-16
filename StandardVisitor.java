@@ -87,3 +87,4 @@ cancelCount = 0;
 rewardPoints = 0;
  }
 //implementing cancelProduct from the parent class
+//implementing cancelProduct from the parent class
