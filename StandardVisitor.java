@@ -70,3 +70,4 @@ if(!isBought){
         }
         else{
  System.out.println("Visitor Id: " + visitorId);
+System.out.println("Full Name: " + fullName);
