@@ -113,3 +113,5 @@ this.isBought = false;
             return "You have not made any purchase";
         }
     }
+//implementing display method from the parent class
+    @Override
