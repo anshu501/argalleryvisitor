@@ -53,3 +53,5 @@ public String buyProduct(String artworkName, double artworkPrice) {
 finalPrice = artworkPrice - discountAmount;
  return discountAmount;
  }
+ //implementing method generateBill() from the parents class which will generate the bill 
+    @Override
