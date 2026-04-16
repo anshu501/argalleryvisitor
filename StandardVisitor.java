@@ -99,3 +99,8 @@ if(this.artworkName.equals(artworkName)){
 this.isBought = false;
                 refundableAmount = artworkPrice - (artworkPrice * 0.05);
                 rewardPoints -= finalPrice * 5;
+ cancelCount++;
+                buyCount--;
+                this.cancellationReason = cancellationReason;
+                return "Your purchase is now cancelled";
+            }
