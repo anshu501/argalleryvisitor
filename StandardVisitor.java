@@ -69,3 +69,4 @@ if(!isBought){
  System.out.println("You have not made any purchase to generate a bill");
         }
         else{
+ System.out.println("Visitor Id: " + visitorId);
