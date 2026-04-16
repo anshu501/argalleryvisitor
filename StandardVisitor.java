@@ -81,3 +81,4 @@ System.out.println("Discounted amount: " + discountAmount);
     reward points to 0*/
   private void terminateVisitor(){
  isActive = false;
+isEligibleForDiscountUpgrade = false;
