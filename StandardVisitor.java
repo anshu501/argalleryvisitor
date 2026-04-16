@@ -21,34 +21,36 @@ public int getVisitLimit(){
 
 //defining method checkDiscountUpgrade() which checks whether the visitor is eligible for discount or not
 public boolean checkDiscountUpgrade(){
-    isEligibleForDiscountUpgrade = true;
-    discountPercent = 0.15f;
-    return isEligibleForDiscountUpgrade;
-}        
+    if(visitCount >= visitLimit){
+            isEligibleForDiscountUpgrade = true;
+            discountPercent = 0.15f;
+        }
+        return isEligibleForDiscountUpgrade;
+    }      
 /*method buyProduct() is implemented from the parent class which will first check whether the visitor have logged in or not and allow
-    visitor to buy the product*/
-@Override
-public String buyProduct(String artworkName, double artworkPrice) {
-    if (!isActive) {
-        return "Please log in before purchasing.";
+        visitor to buy the product*/
+    @Override
+    public String buyProduct(String artworkName, double artworkPrice) {
+        if (!isActive) {
+            return "Please log in before purchasing.";
     }
-    if(this.artworkName==null || !this.artworkName.equals(artworkName)){
-        this.artworkName = artworkName;
-        this.artworkPrice = artworkPrice;     
-        this.isBought = true;       
-        this.buyCount++;
+        if(this.artworkName==null || !this.artworkName.equals(artworkName)){
+            this.artworkName = artworkName;
+            this.artworkPrice = artworkPrice;     
+            this.isBought = true;       
+            this.buyCount++;
+            return "You have already purchased this product";
+        }
         return "You have already purchased this product";
     }
-    return "You have already purchased this product";
-}
 
-//method calculateDiscount() is implemented from parents class which will let user get a discount on the artwork they have bought
-@Override
+    //method calculateDiscount() is implemented from parents class which will let user get a discount on the artwork they have bought
+    @Override
     public double calculateDiscount(){
- if(!isBought){
-      return 0;
-    }
-    checkDiscountUpgrade();
+        if(!isBought){
+            return 0;
+        }
+        checkDiscountUpgrade();
         discountAmount = artworkPrice * discountPercent;
         finalPrice = artworkPrice - discountAmount;
         return discountAmount;
@@ -63,6 +65,7 @@ public String buyProduct(String artworkName, double artworkPrice) {
         return rewardPoints;
     }
 
+    //implementing method generateBill() from the parents class which will generate the bill 
     @Override
     public void generateBill(){
         if(!isBought){
@@ -77,6 +80,3 @@ public String buyProduct(String artworkName, double artworkPrice) {
             System.out.println("Final Price: " + finalPrice);
         }
     }
-
-    
-
