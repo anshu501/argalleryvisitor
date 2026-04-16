@@ -117,3 +117,5 @@ this.isBought = false;
     @Override
 public void display(){
  super.display();
+ System.out.println("Eligible for the discount upgrade: " + isEligibleForDiscountUpgrade);
+        System.out.println("The visit limit: " + visitLimit);
