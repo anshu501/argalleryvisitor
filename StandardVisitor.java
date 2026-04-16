@@ -86,3 +86,4 @@ visitCount = 0;
 cancelCount = 0;
 rewardPoints = 0;
  }
+//implementing cancelProduct from the parent class
