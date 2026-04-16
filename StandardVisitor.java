@@ -52,3 +52,4 @@ public String buyProduct(String artworkName, double artworkPrice) {
  discountAmount = artworkPrice * discountPercent;
 finalPrice = artworkPrice - discountAmount;
  return discountAmount;
+ }
