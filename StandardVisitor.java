@@ -115,3 +115,4 @@ this.isBought = false;
     }
 //implementing display method from the parent class
     @Override
+public void display(){
