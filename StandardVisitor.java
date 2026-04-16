@@ -94,3 +94,5 @@ public String cancelProduct(String artworkName,String cancellationReason){
             return "Your account has been terminated because it exceeded the cancel limit of 3";
         }
 if(buyCount > 0){
+if(this.artworkName.equals(artworkName)){
+                this.artworkName = "";
