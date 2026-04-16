@@ -914,5 +914,48 @@ public class ArtGalleryGUI{
                         sb.append("=".repeat(200)).append("\n"); // underline (adjust 160 if needed)
 
                         // Table rows
-                                   
+                         for (ArtGalleryVisitor obj : visitors) {
+                            //out.writeObject(obj);
+                            int id = obj.getVisitorId();
+                            String name = obj.getFullName();
+                            String gender = obj.getGender();
+                            String contact = obj.getContactNumber();
+                            String regDate = obj.getRegistrationDate();
+                            double ticketCost = obj.getTicketCost();
+                            String ticketType = obj.getTicketType();
+                            boolean active = obj.getIsActive();
+                            int visits = obj.getVisitCount();
+                            int buys = obj.getBuyCount();
+                            String artworkName = obj.getArtworkName();
+                            double artworkPrice = obj.getArtworkPrice();
+                            int cancels = obj.getCancelCount();
+                            String personalArt;
+                            if(obj instanceof EliteVisitor){
+                                EliteVisitor ev = (EliteVisitor) obj;
+                                personalArt = ev.getAssignedPersonalArtAdvisor() ? "Yes" : "No";
+                            }else{
+                                personalArt = "None";
+                            }
+                            String row = String.format(
+                                    "%-10d %-20s %-10s %-15s %-15s %-12.2f %-12s %-10s %-10d %-10d %-20s %-12.2f %-12d %-20s",
+                                    id, name, gender, contact, regDate,
+                                    ticketCost, ticketType, active, visits, buys,
+                                    artworkName, artworkPrice, cancels, personalArt
+                                );
+                            sb.append(row).append("\n");
+                        }
+
+                        // Write everything at once
+                        writer.write(sb.toString());
+                        writer.close();
+                        JOptionPane.showMessageDialog(null, "Visitors saved successfully to " + file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                
+            });
+        
+
 
