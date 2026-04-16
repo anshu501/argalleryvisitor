@@ -48,5 +48,35 @@ public String buyProduct(String artworkName, double artworkPrice) {
  if(!isBought){
       return 0;
     }
+    checkDiscountUpgrade();
+        discountAmount = artworkPrice * discountPercent;
+        finalPrice = artworkPrice - discountAmount;
+        return discountAmount;
 
+    }
+
+    @Override
+    public double calculateRewardPoint(){
+        if(isBought){
+            rewardPoints += finalPrice * 5;
+        }
+        return rewardPoints;
+    }
+
+    @Override
+    public void generateBill(){
+        if(!isBought){
+            System.out.println("You have not made any purchase to generate a bill");
+        }
+        else{
+            System.out.println("Visitor Id: " + visitorId);
+            System.out.println("Full Name: " + fullName);
+            System.out.println("Artwork purchased: " + artworkName);
+            System.out.println("Initial Price: " + artworkPrice);
+            System.out.println("Discounted amount: " + discountAmount);
+            System.out.println("Final Price: " + finalPrice);
+        }
+    }
+
+    
 
