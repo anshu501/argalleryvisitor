@@ -74,3 +74,5 @@ System.out.println("Full Name: " + fullName);
  System.out.println("Artwork purchased: " + artworkName);
  System.out.println("Initial Price: " + artworkPrice);
 System.out.println("Discounted amount: " + discountAmount);
+ System.out.println("Final Price: " + finalPrice);
+        }
