@@ -82,3 +82,52 @@ public boolean checkDiscountUpgrade(){
             System.out.println("Final Price: " + finalPrice);
         }
     }
+
+
+    /*difining terminateVisitor() method which will set active status and discount eligibility to false and set visit count, cancel count, and 
+    reward points to 0*/
+    private void terminateVisitor(){
+        isActive = false;
+        isEligibleForDiscountUpgrade = false;
+        visitCount = 0;
+        cancelCount = 0;
+        rewardPoints = 0;
+    }
+
+    //implementing cancelProduct from the parent class
+    @Override
+    public String cancelProduct(String artworkName,String cancellationReason){
+        if(cancelCount == 3){
+            terminateVisitor();
+            return "Your account has been terminated because it exceeded the cancel limit of 3";
+        }
+        if(buyCount > 0){
+            if(this.artworkName.equals(artworkName)){
+                this.artworkName = "";
+                this.isBought = false;
+                refundableAmount = artworkPrice - (artworkPrice * 0.05);
+                rewardPoints -= finalPrice * 5;
+                cancelCount++;
+                buyCount--;
+                this.cancellationReason = cancellationReason;
+                return "Your purchase is now cancelled";
+            }
+            else{
+                return "Make sure you have entered the correct artwork name";
+            }
+        }
+
+        else{
+            return "You have not made any purchase";
+        }
+    }
+
+    //implementing display method from the parent class
+    @Override
+    public void display(){
+        super.display();
+        System.out.println("Eligible for the discount upgrade: " + isEligibleForDiscountUpgrade);
+        System.out.println("The visit limit: " + visitLimit);
+        System.out.println("Your discount percent: " + discountPercent);
+    }
+}
