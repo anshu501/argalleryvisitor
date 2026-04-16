@@ -66,3 +66,6 @@ public double calculateRewardPoint(){ //implementing method calculateRewardPoint
  @Override
 public void generateBill(){//implementing method generateBill() from the parents cla
 if(!isBought){
+ System.out.println("You have not made any purchase to generate a bill");
+        }
+        else{
