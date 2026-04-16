@@ -84,3 +84,4 @@ System.out.println("Discounted amount: " + discountAmount);
 isEligibleForDiscountUpgrade = false;
 visitCount = 0;
 cancelCount = 0;
+rewardPoints = 0;
