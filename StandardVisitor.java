@@ -93,3 +93,4 @@ public String cancelProduct(String artworkName,String cancellationReason){
  terminateVisitor();
             return "Your account has been terminated because it exceeded the cancel limit of 3";
         }
+if(buyCount > 0){
