@@ -55,3 +55,4 @@ finalPrice = artworkPrice - discountAmount;
  }
  //implementing method generateBill() from the parents class which will generate the bill 
     @Override
+public double calculateRewardPoint(){ //implementing method calculateRewardPoint() from the parents class
