@@ -80,3 +80,4 @@ System.out.println("Discounted amount: " + discountAmount);
 /*difining terminateVisitor() method which will set active status and discount eligibility to false and set visit count, cancel count, and 
     reward points to 0*/
   private void terminateVisitor(){
+ isActive = false;
