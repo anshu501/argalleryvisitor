@@ -64,4 +64,4 @@ public double calculateRewardPoint(){ //implementing method calculateRewardPoint
 
     ss which will generate the bill 
  @Override
-ublic void generateBill(){//implementing method generateBill() from the parents cla
+public void generateBill(){//implementing method generateBill() from the parents cla
