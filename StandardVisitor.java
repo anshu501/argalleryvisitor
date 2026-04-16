@@ -48,5 +48,5 @@ public String buyProduct(String artworkName, double artworkPrice) {
  if(!isBought){
       return 0;
     }
-
+        checkDiscountUpgrade();
 
