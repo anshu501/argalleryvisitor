@@ -481,6 +481,7 @@ public class ArtGalleryGUI{
                                 String message = visitor.buyProduct(name, price);
                                 JOptionPane.showMessageDialog(null, message, "Remarks", JOptionPane.INFORMATION_MESSAGE);
                                 visitorFound = true;
+                                break;
                             }
                         }
                         if (!visitorFound) {
