@@ -59,3 +59,5 @@ public double calculateRewardPoint(){ //implementing method calculateRewardPoint
         if(isBought){
  rewardPoints += finalPrice * 5;
  }
+ return rewardPoints;
+    
