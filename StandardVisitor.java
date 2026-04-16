@@ -60,4 +60,6 @@ public double calculateRewardPoint(){ //implementing method calculateRewardPoint
  rewardPoints += finalPrice * 5;
  }
  return rewardPoints;
-    
+  }   
+
+    ss which will generate the bill 
