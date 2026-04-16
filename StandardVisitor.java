@@ -83,3 +83,4 @@ System.out.println("Discounted amount: " + discountAmount);
  isActive = false;
 isEligibleForDiscountUpgrade = false;
 visitCount = 0;
+cancelCount = 0;
