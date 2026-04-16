@@ -119,3 +119,5 @@ public void display(){
  super.display();
  System.out.println("Eligible for the discount upgrade: " + isEligibleForDiscountUpgrade);
         System.out.println("The visit limit: " + visitLimit);
+  System.out.println("Your discount percent: " + discountPercent);
+    }
