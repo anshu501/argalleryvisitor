@@ -50,3 +50,4 @@ public String buyProduct(String artworkName, double artworkPrice) {
     }
         checkDiscountUpgrade();
  discountAmount = artworkPrice * discountPercent;
+finalPrice = artworkPrice - discountAmount;
