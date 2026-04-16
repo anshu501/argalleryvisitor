@@ -88,3 +88,5 @@ rewardPoints = 0;
  }
 //implementing cancelProduct from the parent class
 //implementing cancelProduct from the parent class
+public String cancelProduct(String artworkName,String cancellationReason){
+        if(cancelCount == 3){
