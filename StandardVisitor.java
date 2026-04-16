@@ -58,3 +58,4 @@ which will calculate the reward points gained by the visitor
 public double calculateRewardPoint(){ //implementing method calculateRewardPoint() from the parents class
         if(isBought){
  rewardPoints += finalPrice * 5;
+ }
