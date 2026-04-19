@@ -139,5 +139,5 @@ public class EliteVisitor extends ArtGalleryVisitor{
       System.out.println("Personal Art advisor: " + assignedPersonalArtAdvisor);
       System.out.println("Exclusive events access: " + exclusiveEventAccess);
   }
-  }
-  
+}
+
